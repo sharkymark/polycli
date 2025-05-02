@@ -1,18 +1,54 @@
-# polyCLI - an any API Python app
+# polyCLI - A Python CLI for Google News
 
-A simple Python CLI to retrieve data from APIs.
+A command-line interface application built in Python to interact with the Google News service via the `gnews` library.
 
-## Functionality
+## Features
 
-1. retrieve links from google news
+*   Fetch top news headlines based on configurable parameters.
+*   Filter news articles by specific websites (e.g., wsj.com, apnews.com, reuters.com) or custom domains.
+*   Search for news articles using keywords.
+*   Configure default search parameters:
+    *   Maximum number of results.
+    *   Time period (e.g., `1d`, `7d`) or specific start/end dates.
+    *   Country.
+    *   Language.
+*   Reset search parameters to their original defaults.
 
-## Resources
+## Requirements
 
-[news api](https://pypi.org/project/gnews/)
+*   Python 3.13
+*   Dependencies listed in [`requirements.txt`](/workspaces/polycli/requirements.txt):
+    *   `gnews`
+    *   `pysqlite3` (Note: `libsqlite3-dev` is installed in the Docker container)
+
+## Setup and Usage
+
+This project is configured to run within a VS Code Development Container.
+
+1.  **Prerequisites:** Docker installed and running. VS Code with the "Dev Containers" extension.
+2.  **Open in Container:** Open the project folder in VS Code and use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) to run "Dev Containers: Reopen in Container".
+3.  **Automatic Start:** The application (`polycli.py`) is automatically executed when the container starts, as defined by the `postStartCommand` in [`.devcontainer/devcontainer.json`](/workspaces/polycli/.devcontainer/devcontainer.json).
+4.  **Interact:** Follow the prompts in the integrated terminal to use the application.
+
+### Dev Container Specifics
+
+*   **GitHub Authentication:** The container includes the GitHub CLI (`gh`). The `devcontainer.json` configuration runs `gh auth login` during container initialization (`postStartCommand`).
+    *   This command will attempt to authenticate the GitHub CLI. If you haven't authenticated `gh` using the `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable.
+
+## Development Environment
+
+The development container ([`.devcontainer/Dockerfile`](/workspaces/polycli/.devcontainer/Dockerfile)) provides a consistent environment with:
+
+*   Python 3.13
+*   Required Python packages installed via `pip`.
+*   Essential build tools (`build-essential`, `libsqlite3-dev`).
+*   Common utilities (`git`, `curl`, `wget`, `htop`, `sudo`, etc.).
+*   GitHub CLI (`gh`).
+*   Goose and Aider CLIs for AI code agent functionality.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE)
+This project is licensed under the [MIT License](/workspaces/polycli/LICENSE).
 
 ## Contributing
 
